@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Campus Connect</string>
+    <string name="app_title">Campus Connect</string>
+    <string name="app_subtitle">Recursos para estudantes internacionais</string>
+
+    <string name="resource_intl_office_name">Escritório de Estudantes Internacionais</string>
+    <string name="resource_intl_office_category">Aconselhamento</string>
+    <string name="resource_intl_office_hours">9:00 - 17:00</string>
+
+    <string name="resource_library_name">Biblioteca Principal</string>
+    <string name="resource_library_category">Espaço de Estudo</string>
+    <string name="resource_library_hours">7:00 - 23:00</string>
+
+    <string name="resource_veterans_name">Centro de Recursos para Veteranos</string>
+    <string name="resource_veterans_category">Serviços de Apoio</string>
+    <string name="resource_veterans_hours">8:00 - 18:00</string>
+
+    <string name="last_updated_label">Última atualização: %1$s</string>
+    <string name="hours_label">Horário: %1$s</string>
+</resources>

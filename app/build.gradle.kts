@@ -1,22 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-
-//    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0" apply false
 }
 
 android {
     namespace = "com.example.campusconnect"
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+        version = release(37)
     }
 
     defaultConfig {
         applicationId = "com.example.campusconnect"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = 37
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -31,15 +27,14 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
 dependencies {
+    implementation(libs.androidx.foundation)
     val composeBom = platform("androidx.compose:compose-bom:2024.09.00")
     implementation(composeBom)
 
@@ -50,6 +45,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.runtime:runtime")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 

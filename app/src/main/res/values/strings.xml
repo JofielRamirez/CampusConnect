@@ -6,7 +6,7 @@
     <string name="resources_section_header">Campus resources</string>
     <string name="category_label">Category: %1$s</string>
 
-    <string name="resource_intl_office_name">International Students office</string>
+    <string name="resource_intl_office_name">International Students Office</string>
     <string name="resource_intl_office_category">Advising</string>
     <string name="resource_intl_office_hours">9:00 AM - 5:00 PM</string>
 
@@ -28,8 +28,7 @@
     <string name="capacity_label">Capacity: %1$s people</string>
 
     <plurals name="review_count">
-        <item quantity="one">%d review </item>
-        <item quantity="other">%d review</item>
+        <item quantity="one">%d review</item>
+        <item quantity="other">%d reviews</item>
     </plurals>
 </resources>
-

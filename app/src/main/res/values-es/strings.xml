@@ -4,7 +4,7 @@
     <string name="app_subtitle">Recursos para estudiantes internacionales</string>
 
     <string name="resources_section_header">Recursos del campus</string>
-    <string name="category_label">Categoria: %1$s</string>
+    <string name="category_label">Categoría: %1$s</string>
 
     <string name="resource_intl_office_name">Oficina de Estudiantes Internacionales</string>
     <string name="resource_intl_office_category">Asesoría</string>
@@ -18,17 +18,17 @@
     <string name="resource_veterans_category">Servicios de Apoyo</string>
     <string name="resource_veterans_hours">8:00 AM - 6:00 PM</string>
 
-    <string name="last_updated_label">Última actualizacion: %1$s</string>
+    <string name="last_updated_label">Última actualización: %1$s</string>
     <string name="hours_label">Horas: %1$s</string>
 
     <string name="content_desc_resource_card">%1$s, %2$s, horario %3$s</string>
 
     <string name="updated_short_label">Actualizado: %1$s</string>
-    <string name="fee_label">Tarifa; %1$s</string>
+    <string name="fee_label">Tarifa: %1$s</string>
     <string name="capacity_label">Capacidad: %1$s personas</string>
 
     <plurals name="review_count">
-        <item quantity="one">%d reseña </item>
+        <item quantity="one">%d reseña</item>
         <item quantity="other">%d reseñas</item>
         <item quantity="many">%d reseñas</item>
     </plurals>

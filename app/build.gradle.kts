@@ -1,6 +1,6 @@
- plugins {
+plugins {
     alias(libs.plugins.android.application)
-     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -34,8 +34,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.foundation)
     val composeBom = platform("androidx.compose:compose-bom:2024.09.00")
     implementation(composeBom)
+
     implementation("androidx.activity:activity-compose:1.9.2")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -43,9 +45,9 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.runtime:runtime")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    implementation("com.google.android.material:material:1.12.0")
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

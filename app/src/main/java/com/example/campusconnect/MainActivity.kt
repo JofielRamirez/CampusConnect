@@ -1,14 +1,15 @@
 package com.example.campusconnect
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -18,6 +19,10 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
+import androidx.compose.ui.platform.LocalLocale
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 
 data class CampusResource(
     @param:StringRes val nameRes: Int,
@@ -27,13 +32,13 @@ data class CampusResource(
     val reviewCount: Int,
     val capacity: Int,
     val fee: Double
-    )
+)
 
 val sampleResources = listOf(
     CampusResource(
         nameRes = R.string.resource_intl_office_name,
         categoryRes = R.string.resource_intl_office_category,
-        hoursRes = R.string.resource_library_hours,
+        hoursRes = R.string.resource_intl_office_hours,
         lastUpdatedDate = LocalDate.of(2026, 8, 3),
         reviewCount = 1,
         capacity = 15,
@@ -53,17 +58,17 @@ val sampleResources = listOf(
         categoryRes = R.string.resource_veterans_category,
         hoursRes = R.string.resource_veterans_hours,
         lastUpdatedDate = LocalDate.of(2026, 8, 15),
-        reviewCount = 8,
+        reviewCount = 0,
         capacity = 40,
         fee = 0.0
     )
 )
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent{
-            MaterialTheme{
+        setContent {
+            MaterialTheme {
                 CampusConnectScreen()
             }
         }
@@ -71,36 +76,41 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CampusConnectScreen(){
-    Column(modifier = Modifier.padding(16.dp)){
-        Text(stringResource(R.string.app_title),
+fun CampusConnectScreen() {
+    Column(modifier = Modifier.padding(dimensionResource(R.dimen.padding_screen))) {
+        Text(
+            stringResource(R.string.app_title),
             style = MaterialTheme.typography.headlineMedium
         )
-        Text(stringResource(R.string.app_subtitle),
-            style = MaterialTheme.typography.headlineMedium
+        Text(
+            stringResource(R.string.app_subtitle),
+            style = MaterialTheme.typography.bodyMedium
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_section)))
 
-        Text(stringResource(R.string.resources_section_header),
-            style = MaterialTheme.typography.titleSmall
+        Text(
+            stringResource(R.string.resources_section_header),
+            style = MaterialTheme.typography.titleSmall,
+            modifier = Modifier.semantics { heading() }
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_list_header)))
 
-        LazyColumn{
+        LazyColumn {
             items(sampleResources) { resource ->
                 ResourceCard(resource)
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.spacing_card_gap)))
             }
         }
     }
 }
 
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 fun ResourceCard(resource: CampusResource) {
     val context = LocalContext.current
-    val locale = Locale.getDefault()
+    val locale = LocalLocale.current.platformLocale
 
     val dateFullFormatter = DateTimeFormatter
         .ofLocalizedDate(FormatStyle.FULL)
@@ -133,10 +143,14 @@ fun ResourceCard(resource: CampusResource) {
     )
 
     Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(12.dp)){
+        Column(
+            modifier = Modifier
+                .padding(dimensionResource(R.dimen.padding_card_inner))
+                .padding(start = dimensionResource(R.dimen.padding_card_start))
+        ) {
             Text(name, style = MaterialTheme.typography.titleMedium)
             Text(
-                stringResource(R.string.category_label),
+                stringResource(R.string.category_label, category),
                 style = MaterialTheme.typography.bodySmall
             )
             Text(hours)
@@ -144,9 +158,10 @@ fun ResourceCard(resource: CampusResource) {
             Text(reviewText)
 
             if (resource.fee > 0.0) {
-                Text(stringResource(R.string.fee_label,
+                Text(stringResource(
+                    R.string.fee_label,
                     currencyFormatter.format(resource.fee))
-                    )
+                )
             }
             Text(
                 stringResource(
@@ -156,10 +171,11 @@ fun ResourceCard(resource: CampusResource) {
                 style = MaterialTheme.typography.bodySmall
             )
 
-            Text(stringResource(
-                R.string.last_updated_label,
-                resource.lastUpdatedDate.format(dateFullFormatter)
-            ),
+            Text(
+                stringResource(
+                    R.string.last_updated_label,
+                    resource.lastUpdatedDate.format(dateFullFormatter)
+                ),
                 style = MaterialTheme.typography.bodySmall
             )
         }
